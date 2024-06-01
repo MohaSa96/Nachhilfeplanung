@@ -1,0 +1,54 @@
+create database Benutzer;
+use Benutzer;
+
+create table schuler(
+schulerid int auto_increment,
+benutzername varchar(60),
+passwort varchar(60),
+primary key (schulerid));
+
+create table lehrer(
+lehrerid int auto_increment,
+benutzername varchar(60),
+passwort varchar(60),
+primary key (lehrerid)
+);
+
+
+create table nachhilfeangebot(
+nachhilfeangebotid int auto_increment,
+fach varchar(60),
+jahrgangstufe varchar(60),
+fachbeherrschung varchar(60),
+primary key (nachhilfeangebotid)
+);
+
+
+create table nachhilfegesuch(
+nachhilfegesuchid int auto_increment,
+fach varchar(60),
+jahrgangstufe varchar(60),
+primary key (nachhilfegesuchid)
+);
+
+
+create table lehrerdaten(
+lehrerid int auto_increment,
+lehrername varchar(60),
+lehrervorname varchar(60),
+nachhilfeangebotid int, nachhilfegesuchid int,
+primary key (lehrerid),
+foreign key (nachhilfeangebotid) references nachhilfeangebot (nachhilfeangebotid),
+foreign key (nachhilfegesuchid) references nachhilfegesuch (nachhilfegesuchid));
+
+
+
+create table schulerdaten(
+schulerid int auto_increment,
+schulername varchar(60),
+schulervorname varchar(60), 
+schuleremailadresse varchar(60),
+nachhilfeangebotid int, nachhilfegesuchid int,
+primary key (schulerid),
+foreign key (nachhilfeangebotid) references nachhilfeangebot (nachhilfeangebotid),
+foreign key (nachhilfegesuchid) references nachhilfegesuch (nachhilfegesuchid));
